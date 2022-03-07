@@ -12,7 +12,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main className="mx-28 mt-10">
         <Title />
         <CitySelector />
       </main>
