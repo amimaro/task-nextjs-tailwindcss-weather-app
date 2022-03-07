@@ -1,0 +1,7 @@
+.today {
+  @apply bg-blue-600 p-1 rounded-md text-white cursor-pointer active:bg-blue-700
+}
+
+.forecast {
+  @apply bg-blue-400 p-1 rounded-md text-white cursor-pointer active:bg-blue-500
+}
