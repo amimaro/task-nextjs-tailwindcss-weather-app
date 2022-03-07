@@ -2,10 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import type { AppState } from "../../app/store";
 import { fetchCities } from "./CitySelectorApi";
-import { CityLocation } from "./types/CityLocation";
+import { ICityLocation } from "./types/ICityLocation";
 
 export interface CityState {
-  cities_list: CityLocation[];
+  cities_list: ICityLocation[];
 }
 
 const initialState: CityState = { cities_list: [] };
@@ -29,6 +29,6 @@ export const citySlice = createSlice({
   },
 });
 
-export const selectCities = (state: AppState) => state.cities.cities_list;
+export const selectCities = (state: AppState) => state.city.cities_list;
 
 export default citySlice.reducer;

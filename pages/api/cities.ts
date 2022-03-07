@@ -1,11 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 import type { NextApiRequest, NextApiResponse } from "next";
-import { CityLocation } from "../../features/CitySelector/types/CityLocation";
+import { ICityLocation } from "../../features/CitySelector/types/ICityLocation";
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<CityLocation[]>
+  res: NextApiResponse<ICityLocation[]>
 ) {
   res.status(200).json([
     {

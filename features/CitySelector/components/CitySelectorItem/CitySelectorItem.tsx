@@ -1,9 +1,9 @@
-import { CityLocation } from "../../types/CityLocation";
+import { ICityLocation } from "../../types/ICityLocation";
 
 export const CitySelectorItem: React.FC<{
-  selectedCity: CityLocation;
+  selectedCity: ICityLocation;
   index: number;
-  city: CityLocation;
+  city: ICityLocation;
 }> = ({ selectedCity, index, city, children }) => {
   return (
     <div

@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { CitySelector } from "../features/CitySelector";
 import { Title } from "../features/components/Title";
+import { WeatherPanel } from "../features/WeatherPanel";
 
 const Home: NextPage = () => {
   return (
@@ -15,6 +16,7 @@ const Home: NextPage = () => {
       <main className="mx-28 mt-10">
         <Title />
         <CitySelector />
+        <WeatherPanel />
       </main>
     </div>
   );

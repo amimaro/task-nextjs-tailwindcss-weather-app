@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { fetchWeatherAsync } from "../WeatherPanel/WeatherPanelSlice";
 import { fetchCitiesAsync, selectCities } from "./CitySelectorSlice";
 import { CitySelectorWrapper } from "./components";
 import { CitySelectorItem } from "./components/CitySelectorItem";
-import { CityLocation } from "./types/CityLocation";
+import { ICityLocation } from "./types/ICityLocation";
 
 export const CitySelector = () => {
   const dispatch = useAppDispatch();
   const cities = useAppSelector(selectCities);
 
-  const [selectedCity, setSelectedCity] = useState<CityLocation | null>(null);
+  const [selectedCity, setSelectedCity] = useState<ICityLocation | null>(null);
 
   useEffect(() => {
     dispatch(fetchCitiesAsync());
@@ -17,6 +18,10 @@ export const CitySelector = () => {
   }, []);
 
   const selectedCityValue = selectedCity || cities[0] || null;
+
+  if (!!selectedCityValue) {
+    dispatch(fetchWeatherAsync(selectedCityValue));
+  }
 
   return (
     <CitySelectorWrapper>

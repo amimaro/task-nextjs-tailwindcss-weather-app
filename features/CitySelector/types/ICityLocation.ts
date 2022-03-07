@@ -1,4 +1,4 @@
-export type CityLocation = {
+export type ICityLocation = {
   name: string;
   lat: number;
   lon: number;
