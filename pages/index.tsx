@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { AppHeader } from "../features/components";
+import { CitySelector } from "../features/CitySelector";
+import { Title } from "../features/components/Title";
 
 const Home: NextPage = () => {
   return (
@@ -12,7 +13,8 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <AppHeader />
+        <Title />
+        <CitySelector />
       </main>
     </div>
   );

@@ -1,8 +1,10 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 
+import cityReducer from "../features/CitySelector/CitySelectorSlice";
+
 export function makeStore() {
   return configureStore({
-    reducer: {},
+    reducer: { cities: cityReducer },
   });
 }
 
