@@ -14,9 +14,7 @@ export const CitySelector = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    setSelectedCity(cities[0]);
-  }, cities);
+  const selectedCityValue = selectedCity || cities[0] || null;
 
   return (
     <div className="flex">
@@ -25,11 +23,11 @@ export const CitySelector = () => {
         {cities.map((city, index) => (
           <div
             key={city.name}
-            className={` text-lg border-t-2 border-r-2 ${
-              selectedCity?.name !== city.name ? "border-b-2" : ""
+            className={`text-lg border-t-2 border-r-2 ${
+              selectedCityValue?.name !== city.name ? "border-b-2" : "scale-105"
             } ${index === 0 ? "border-l-2" : ""}`}
           >
-            <button className="p-2" onClick={() => setSelectedCity(city)}>
+            <button className="py-2 px-4" onClick={() => setSelectedCity(city)}>
               {city.name}
             </button>
           </div>
