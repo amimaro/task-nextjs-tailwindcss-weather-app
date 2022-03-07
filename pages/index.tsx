@@ -14,10 +14,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="mx-28 mt-10 h-full">
+      <main className="mx-4 md:mx-28 mt-10 h-full">
         <AppTitle>Weather App</AppTitle>
         <CitySelector />
-        <div className="flex h-full mt-6">
+        <div className="flex md:flex-row flex-col gap-4 h-full mt-6">
           <WeatherPanel />
           <AppCalendar />
         </div>

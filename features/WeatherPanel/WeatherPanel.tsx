@@ -10,7 +10,7 @@ export const WeatherPanel = () => {
 
   if (!weather) {
     return (
-      <div className="relative w-full">
+      <div className="relative w-full h-96">
         <AppLoader />
       </div>
     );
@@ -20,7 +20,7 @@ export const WeatherPanel = () => {
     <div className="w-full">
       <div>
         <AppSubtitle>Current weather</AppSubtitle>
-        <div className="flex items-center text-2xl gap-4">
+        <div className="flex flex-col md:flex-row text-center md:text-left items-center text-2xl gap-4">
           <img
             className="w-28 h-28"
             src={`http://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png`}
