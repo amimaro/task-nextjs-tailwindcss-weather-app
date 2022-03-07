@@ -19,9 +19,12 @@ export const CitySelector = () => {
 
   const selectedCityValue = selectedCity || cities[0] || null;
 
-  if (!!selectedCityValue) {
-    dispatch(fetchWeatherAsync(selectedCityValue));
-  }
+  useEffect(() => {
+    if (!!selectedCityValue) {
+      dispatch(fetchWeatherAsync(selectedCityValue));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCityValue]);
 
   return (
     <CitySelectorWrapper>

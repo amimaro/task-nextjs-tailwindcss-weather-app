@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { CitySelector } from "../features/CitySelector";
-import { Title } from "../features/components/Title";
+import { AppCalendar } from "../features/components/AppCalendar";
+import { AppTitle } from "../features/components/AppTitle";
 import { WeatherPanel } from "../features/WeatherPanel";
 
 const Home: NextPage = () => {
@@ -13,10 +14,13 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="mx-28 mt-10">
-        <Title />
+      <main className="mx-28 mt-10 h-full">
+        <AppTitle>Weather App</AppTitle>
         <CitySelector />
-        <WeatherPanel />
+        <div className="flex h-full mt-6">
+          <WeatherPanel />
+          <AppCalendar />
+        </div>
       </main>
     </div>
   );

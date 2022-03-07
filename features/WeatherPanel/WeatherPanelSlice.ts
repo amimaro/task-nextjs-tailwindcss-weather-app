@@ -15,6 +15,7 @@ export const fetchWeatherAsync = createAsyncThunk(
   "weather/fetchWeather",
   async (city: ICityLocation) => {
     const response = await fetchWeather(city);
+    await new Promise((resolve) => setTimeout(() => resolve(""), 1000));
     return response;
   }
 );
