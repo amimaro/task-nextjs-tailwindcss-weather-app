@@ -66,11 +66,15 @@ export const AppCalendar = () => {
         selectedYear={selectedYear}
         handleSetSelectedMonth={setSelectedMonth}
       />
-      <div className="grid grid-cols-7 gap-5 px-5">
+      <div className="grid grid-cols-7 gap-3 px-5">
         <CalendarWeek />
         {[...Array(42)].map((day, index) => {
           return (
-            <div key={"day" + index}>
+            <div
+              key={"day" + index}
+              className={`${isToday(index)} ${isForecast(index)}`}
+              onClick={() => dispatch(setForecast(index - weekStartAt + 1))}
+            >
               {index < weekStartAt && (
                 <span className="text-gray-400">
                   {daysInMonth(selectedYear, selectedMonth - 1) +
@@ -81,12 +85,7 @@ export const AppCalendar = () => {
               {index >= weekStartAt &&
               index <=
                 daysInMonth(selectedYear, selectedMonth) + weekStartAt - 1 ? (
-                <span
-                  className={`${isToday(index)} ${isForecast(index)}`}
-                  onClick={() => dispatch(setForecast(index - weekStartAt + 1))}
-                >
-                  {index - weekStartAt + 1}
-                </span>
+                <span>{index - weekStartAt + 1}</span>
               ) : (
                 ""
               )}
