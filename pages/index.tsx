@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { CitySelector } from "../features/CitySelector";
-import { AppCalendar } from "../features/components/AppCalendar";
+import { AppCalendar } from "../features/AppCalendar";
 import { AppTitle } from "../features/components/AppTitle";
 import { WeatherPanel } from "../features/WeatherPanel";
 

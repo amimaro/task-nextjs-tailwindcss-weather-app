@@ -1,23 +1,8 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "../../../app/hooks";
-import { setForecast } from "../../WeatherPanel/WeatherPanelSlice";
+import { useAppDispatch } from "../../app/hooks";
+import { setForecast } from "../WeatherPanel/WeatherPanelSlice";
 import calendarStyles from "./AppCalendar.module.css";
-
-const months = [
-  "january",
-  "february",
-  "march",
-  "april",
-  "may",
-  "june",
-  "july",
-  "august",
-  "september",
-  "october",
-  "november",
-  "december",
-];
-const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
+import { months, weekDays } from "./common/calendar-data";
 
 export const AppCalendar = () => {
   const dispatch = useAppDispatch();
