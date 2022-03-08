@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../app/hooks";
 import { setForecast } from "../WeatherPanel/WeatherPanelSlice";
 import calendarStyles from "./AppCalendar.module.css";
-import { months, weekDays } from "./common/calendar-data";
+import { CalendarWeek, CalendarHeader } from "./components";
 
 export const AppCalendar = () => {
   const dispatch = useAppDispatch();
@@ -61,55 +61,13 @@ export const AppCalendar = () => {
 
   return (
     <div className="w-96 h-96 mb-4 text-center border-2 rounded-md">
-      <div className="flex justify-between items-center">
-        <button
-          className="p-2 m-2 rounded-full active:bg-gray-200"
-          onClick={() => setSelectedMonth(selectedMonth - 1)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
-        <div className="capitalize text-xl font-medium">
-          {months[selectedMonth]} {selectedYear}
-        </div>
-        <button
-          className="p-2 m-2 rounded-full active:bg-gray-200"
-          onClick={() => setSelectedMonth(selectedMonth + 1)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </button>
-      </div>
+      <CalendarHeader
+        selectedMonth={selectedMonth}
+        selectedYear={selectedYear}
+        handleSetSelectedMonth={setSelectedMonth}
+      />
       <div className="grid grid-cols-7 gap-5 px-5">
-        {weekDays.map((weekDay, index) => (
-          <div key={weekDay + index} className="text-lg font-medium">
-            {weekDay}
-          </div>
-        ))}
+        <CalendarWeek />
         {[...Array(42)].map((day, index) => {
           return (
             <div key={"day" + index}>
