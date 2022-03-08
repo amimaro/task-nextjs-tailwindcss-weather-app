@@ -83,7 +83,7 @@ export const AppCalendar = () => {
                 daysInMonth(selectedYear, selectedMonth) + weekStartAt - 1 ? (
                 <span
                   className={`${isToday(index)} ${isForecast(index)}`}
-                  onClick={() => dispatch(setForecast(index - today - 1))}
+                  onClick={() => dispatch(setForecast(index - weekStartAt + 1))}
                 >
                   {index - weekStartAt + 1}
                 </span>

@@ -3,11 +3,16 @@ import { AppLoader } from "../components/AppLoader";
 import { AppSubtitle } from "../components/AppSubtitle";
 import { WeatherItem } from "./components/WeatherItem";
 import { IWeatherCurrentData, IWeatherDailyData } from "./types/IWeatherData";
-import { selectForecast, selectWeather } from "./WeatherPanelSlice";
+import {
+  selectForecast,
+  selectForecastDate,
+  selectWeather,
+} from "./WeatherPanelSlice";
 
 export const WeatherPanel = () => {
   const weather = useAppSelector(selectWeather);
   const selectedForecast = useAppSelector(selectForecast);
+  const selectedForecastDate = useAppSelector(selectForecastDate);
 
   if (!weather) {
     return (
@@ -37,17 +42,18 @@ export const WeatherPanel = () => {
           weather={weather.current as IWeatherCurrentData & IWeatherDailyData}
         />
       </div>
-      <div className="md:my-0 my-2">
-        <AppSubtitle>
-          Forecast {getFormattedDate(weather.daily[selectedForecast].dt)}
-        </AppSubtitle>
-        <WeatherItem
-          weather={
-            weather.daily[selectedForecast] as IWeatherCurrentData &
-              IWeatherDailyData
-          }
-        />
-      </div>
+      {!!selectedForecast && (
+        <div className="md:my-0 my-2">
+          <AppSubtitle>
+            Forecast {getFormattedDate(selectedForecast.dt)}
+          </AppSubtitle>
+          <WeatherItem
+            weather={
+              selectedForecast as IWeatherCurrentData & IWeatherDailyData
+            }
+          />
+        </div>
+      )}
     </div>
   );
 };
