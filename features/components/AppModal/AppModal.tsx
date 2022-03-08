@@ -1,36 +1,42 @@
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
-export const AppModal: React.FC<{ isOpen: boolean }> = ({
-  isOpen,
-  children,
-}) => {
+export const AppModal: React.FC<{
+  isOpen: boolean;
+  modalClose: () => void;
+}> = ({ isOpen, modalClose, children }) => {
   const [container] = useState(() => {
-    return document.createElement("div");
+    const el = document.createElement("div");
+    el.setAttribute("id", "");
+    return el;
   });
 
   useEffect(() => {
     if (isOpen) {
       document.body.appendChild(container);
-    } else {
+    } else if (document.body.contains(container)) {
       document.body.removeChild(container);
     }
   });
 
-  const closeModal = (e: Event) => {
+  const handleCloseModal = (e: Event) => {
     e.stopPropagation();
     document.body.removeChild(container);
+    modalClose();
   };
 
   const Modal = (
     <div
       className="fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-black bg-opacity-50"
-      onClick={(e: any) => closeModal(e)}
+      onClick={(e: any) => handleCloseModal(e)}
     >
-      <div className="fixed flex flex-col overflow-hidden bg-white rounded-lg">
+      <div
+        className="fixed flex flex-col overflow-hidden bg-white rounded-lg"
+        onClick={(e: any) => e.stopPropagation()}
+      >
         <button
           className="absolute top-2 right-2"
-          onClick={(e: any) => closeModal(e)}
+          onClick={(e: any) => handleCloseModal(e)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
