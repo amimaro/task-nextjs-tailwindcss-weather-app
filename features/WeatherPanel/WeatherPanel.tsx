@@ -39,8 +39,7 @@ export const WeatherPanel = () => {
       </div>
       <div className="md:my-0 my-2">
         <AppSubtitle>
-          {selectedForecast === 0 && "Today's"} Forecast{" "}
-          {getFormattedDate(weather.daily[selectedForecast].dt)}
+          Forecast {getFormattedDate(weather.daily[selectedForecast].dt)}
         </AppSubtitle>
         <WeatherItem
           weather={
