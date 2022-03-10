@@ -60,4 +60,7 @@ export const selectForecast = (state: AppState) =>
 export const selectForecastDate = (state: AppState) =>
   state.weather.selectedForecastDate;
 
+export const selectCurrentDate = (state: AppState) =>
+  state.weather.weather_obj?.current.dt! * 1000;
+
 export default weatherSlice.reducer;

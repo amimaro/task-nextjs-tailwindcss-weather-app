@@ -1,36 +1,53 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "../../app/hooks";
-import { setForecast } from "../WeatherPanel/WeatherPanelSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { AppLoader } from "../components/AppLoader";
+import {
+  selectCurrentDate,
+  setForecast,
+} from "../WeatherPanel/WeatherPanelSlice";
 import calendarStyles from "./AppCalendar.module.css";
 import { CalendarWeek, CalendarHeader } from "./components";
 
+const daysInMonth = (year: number, month: number) => {
+  if (month < 0) {
+    month = 11;
+    year--;
+  }
+  if (month > 11) {
+    month = 0;
+    year++;
+  }
+  return 32 - new Date(year, month, 32).getDate();
+};
+
+const getWeekStart = (year: number, month: number) => {
+  return new Date(year, month).getDay();
+};
+
+const getDateInfo = (date: number) => {
+  const dateObj = new Date(date);
+  return {
+    today: dateObj.getDate(),
+    monthIndex: dateObj.getMonth(),
+    year: dateObj.getFullYear(),
+    weekStartAtIndex: getWeekStart(dateObj.getFullYear(), dateObj.getMonth()),
+  };
+};
+
 export const AppCalendar = () => {
   const dispatch = useAppDispatch();
+  const currentDate = useAppSelector(selectCurrentDate);
 
-  const daysInMonth = (year: number, month: number) => {
-    if (month < 0) {
-      month = 11;
-      year--;
-    }
-    if (month > 11) {
-      month = 0;
-      year++;
-    }
-    return 32 - new Date(year, month, 32).getDate();
-  };
+  const [selectedMonth, setSelectedMonth] = useState(0);
+  const [selectedYear, setSelectedYear] = useState(2022);
+  const [weekStartAt, setWeekStartAt] = useState(0);
 
-  const getWeekStart = (year: number, month: number) => {
-    return new Date(year, month).getDay();
-  };
-
-  const date = new Date();
-  const today = date.getDate();
-  const monthIndex = date.getMonth();
-  const year = date.getFullYear();
-  const weekStartAtIndex = getWeekStart(year, monthIndex);
-  const [selectedMonth, setSelectedMonth] = useState(monthIndex);
-  const [selectedYear, setSelectedYear] = useState(year);
-  const [weekStartAt, setWeekStartAt] = useState(weekStartAtIndex);
+  useEffect(() => {
+    const { monthIndex, year, weekStartAtIndex } = getDateInfo(currentDate);
+    setSelectedMonth(monthIndex);
+    setSelectedYear(year);
+    setWeekStartAt(weekStartAtIndex);
+  }, [currentDate]);
 
   useEffect(() => {
     if (selectedMonth > 11) {
@@ -41,9 +58,14 @@ export const AppCalendar = () => {
       setSelectedYear(selectedYear - 1);
     }
     setWeekStartAt(getWeekStart(selectedYear, selectedMonth));
-  }, [selectedMonth, selectedYear, year]);
+  }, [selectedMonth, selectedYear]);
+
+  if (isNaN(currentDate)) {
+    return <AppLoader />;
+  }
 
   const isToday = (index: number) => {
+    const { today, monthIndex, year } = getDateInfo(currentDate);
     const isTodaysMonth = selectedMonth === monthIndex;
     const isTodaysYear = selectedYear === year;
     if (!isTodaysMonth || !isTodaysYear) return "";
@@ -51,6 +73,7 @@ export const AppCalendar = () => {
   };
 
   const isForecast = (index: number) => {
+    const { today, monthIndex, year } = getDateInfo(currentDate);
     const isTodaysMonth = selectedMonth === monthIndex;
     const isTodaysYear = selectedYear === year;
     if (!isTodaysMonth || !isTodaysYear) return "";

@@ -26,11 +26,7 @@ export const WeatherPanel = () => {
   }, [selectedForecast, weather]);
 
   if (!weather) {
-    return (
-      <div className="relative w-full h-96">
-        <AppLoader />
-      </div>
-    );
+    return <AppLoader />;
   }
 
   const getFormattedDate = (dt: number) => {
